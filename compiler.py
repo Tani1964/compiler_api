@@ -23,6 +23,7 @@ class Compiler:
         # Step 2: syntax analysis
         self.syntax_analyzer = SyntaxAnalyzer(self.tokens)
         self.ast = self.syntax_analyzer.parseTreeGenerator()
+        print(self.ast)
         
         # Step 3: semantic analysis
         
@@ -30,7 +31,7 @@ class Compiler:
         self.intermediate_code_generator = IntermediateCodeGenerator(self.ast)
         self.intermediate_code = self.intermediate_code_generator.generate_intermediate_code()
         
-        # Step 5: code generation
+        # # Step 5: code generation
         self.machine_code_generator = MachineCodeGenerator(self.intermediate_code)
         self.machine_code = self.machine_code_generator.generate_code()
         

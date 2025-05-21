@@ -3,8 +3,8 @@ import re
 class LexicalAnalyzer:
     def __init__(self):
         self.keywords = ["if", "else", "while", "for", "int", "float", "char"]
-        self.operators = ["+", "-", "*", "/", "=", "<", ">", "<=", ">=", "==", "!="]
-        self.delimiters = [";", ",", "{", "}"]
+        self.operators = ["+", "-", "*","**", "/", "=", "<", ">", "<=", ">=", "==", "!="]
+        self.delimiters = [";", ",", "{", "}", "(", ")", "[", "]"]
 
     def is_keyword(self, token):
         return token in self.keywords
@@ -20,13 +20,15 @@ class LexicalAnalyzer:
 
     def scanner(self, statement):
         # Tokenize using regex to capture operators, identifiers, numbers, etc.
-        pattern = r'(\b\w+\b|==|!=|<=|>=|[+\-*/=<>;{},])'
+        pattern = r'(\b\w+\b|==|!=|<=|>=|\*\*|[+\-*/=<>;{},()\[\]])'
         tokens = re.findall(pattern, statement)
         return tokens
 
     def analyzer(self, statement):
         tokensWithTypes = []
         tokens = self.scanner(statement)
+        print(tokens)
+
 
         for token in tokens:
             if self.is_keyword(token):
@@ -42,5 +44,5 @@ class LexicalAnalyzer:
             else:
                 tokensWithTypes.append([token,"unknown"])
         
-        print(tokensWithTypes)
+        # print(tokensWithTypes)
         return tokensWithTypes

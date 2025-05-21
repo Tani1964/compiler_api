@@ -11,8 +11,10 @@ class IntermediateCodeGenerator:
         self.symbol_table = {
             # Arithmetic operations
             "+": "ADD",  # ADD destination, source
+            "**":"POWER",
             "-": "SUB",  # SUB destination, source
             "*": "IMUL",  # IMUL destination, source
+            "**": "POWER",  # POWER destination, source
             "/": "IDIV",  # IDIV source (DIV/IDIV uses implicit registers AX/DX)
             # Assignment
             "=": "MOV",  # MOV destination, source
@@ -47,6 +49,7 @@ class IntermediateCodeGenerator:
         }
 
     def generate_intermediate_code(self):
+        print("Generating intermediate code...")
         if not self.ast or not isinstance(self.ast, dict):
             raise ValueError("AST is empty or invalid")
         self.process_node(self.ast)
