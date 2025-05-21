@@ -11,6 +11,8 @@ def message():
 
 @app.route('/',methods=["POST"])
 def compiler():
+    if request.method == "GET":
+        return jsonify({'message': 'Hello from the Flask backend!'})
     if request.method == "POST":
         data = request.get_json()
         statement = data.get('text')
